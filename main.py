@@ -24,12 +24,23 @@ def home():
     return render_template('base.html')
 
 
-@app.route("/control/", methods=['POST'])
-def control():
-    if request.method == 'POST':
-        subprocess.run(
-            ["/home/pi/my_flask/UI_Buttons_Bash/Connect.sh"], shell=True)
-    return "render_template('base.html')"
+@app.route("/connect/")
+def connnect():
+    subprocess.run(
+        ["/home/pi/my_flask/UI_Buttons_Bash/Connect.sh"], shell=True)
+    return render_template('Control.html')
+
+@app.route("/homing/")
+def homing():
+    subprocess.run(
+        ["/home/pi/my_flask/UI_Buttons_Bash/Homing.sh"], shell=True)
+    return render_template('Control.html')
+
+@app.route("/reset_alarm/")
+def reset_alarm():
+    subprocess.run(
+        ["/home/pi/my_flask/UI_Buttons_Bash/Reset_Alarm.sh"], shell=True)
+    return render_template('Control.html')
 
 
 @app.route("/convert")
