@@ -27,9 +27,18 @@
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
 			tabindex="0">
-			<form action="/control/" method="post">
+			<div id="output_div" style="margin-top: 10px;margin-bottom: 10px;">
+				<a href="./convert">convert</a>
+			<form action="/connect/">
 				<button name="controlBtn" type="submit">Connect</button>
 			</form>
+			<form action="/homing/">
+				<button name="controlBtn" type="submit">Homing</button>
+			</form>
+			<form action="/reset_alarm/">
+				<button name="controlBtn" type="submit">Reset_Alarm</button>
+			</form>
+			</div>
 		</div>
 	</div>
 	<div class="tab-pane fade" id="control-tab-pane" role="tabpanel" aria-labelledby="control-tab" tabindex="0">
