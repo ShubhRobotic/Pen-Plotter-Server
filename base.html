@@ -4,52 +4,67 @@
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<title>{% block title %}home{% endblock %}</title>
+	<title>{% block title %}Control{% endblock %}</title>
 	<meta charset=utf-8>
 </head>
-
+	<h1>Pen Plotter</h1>
 <body>
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="myTabContent" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-				type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+			<button class="nav-link active" id="myTabContent" data-bs-toggle="tab" data-bs-target="#Control-tab-pane"
+				type="button" role="tab" aria-Resizes="Control-tab-pane" aria-selected="true">Control</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="myTabContent" data-bs-toggle="tab" data-bs-target="#control-tab-pane"
-				type="button" role="tab" aria-controls="control-tab-pane" aria-selected="false">Control</button>
+			<button class="nav-link" id="myTabContent" data-bs-toggle="tab" data-bs-target="#Resize-tab-pane"
+				type="button" role="tab" aria-Resizes="Resize-tab-pane" aria-selected="false">Resize</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="myTabContent" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
-				type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+			<button class="nav-link" id="myTabContent" data-bs-toggle="tab" data-bs-target="#Gcode-Converter-tab-pane"
+				type="button" role="tab" aria-Resizes="Gcode-Converter-tab-pane" aria-selected="false">Gcode-Converter</button>
 		</li>
 		<li class="nav-item" role="presentation">
 	</ul>
 	<div class="tab-content" id="myTabContent">
-		<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+		<div class="tab-pane fade show active" id="Control-tab-pane" role="tabpanel" aria-labelledby="Control-tab"
 			tabindex="0">
+			<!--		Control-Starts		-->
 			<div id="output_div" style="margin-top: 10px;margin-bottom: 10px;">
-				<a href="./convert">convert</a>
 			<form action="/connect/">
-				<button name="controlBtn" type="submit">Connect</button>
+				<button name="ResizeBtn" type="submit">Connect</button>
 			</form>
 			<form action="/homing/">
-				<button name="controlBtn" type="submit">Homing</button>
+				<button name="ResizeBtn" type="submit">Homing</button>
 			</form>
 			<form action="/reset_alarm/">
-				<button name="controlBtn" type="submit">Reset_Alarm</button>
+				<button name="ResizeBtn" type="submit">Reset_Alarm</button>
 			</form>
 			</div>
+			<!--		Control-Ends		-->
 		</div>
 	</div>
-	<div class="tab-pane fade" id="control-tab-pane" role="tabpanel" aria-labelledby="control-tab" tabindex="0">
+	<div class="tab-pane fade" id="Resize-tab-pane" role="tabpanel" aria-labelledby="Resize-tab" tabindex="0">
+		<!--			RESiZE-STARTS 			-->
+		<form method='POST' enctype='multipart/form-data'>
+			{{form.hidden_tag()}}
+			{{form.file()}} <div id="form">{{form.submit()}}</div>
+		</form>
+		<script>
+			function alertFunction() {
+				alert("File has been Uploaded");
+			}
+			document.querySelector("#form").addEventListener("click", alertFunction);
 
+		</script>
+		<a href="./static/files/foo.jpg" download="" class="download-btn">Download</a>
+		<!--			RESIZE-ENDS		-->
 	</div>
-	<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-		...</div>
+	<div class="tab-pane fade" id="Gcode-Converter-tab-pane" role="tabpanel" aria-labelledby="Gcode-Converter-tab" tabindex="0">
+	<h1>Pen Plotter Manual contol</h1>
+	<object style="height: 75vh; width: 100vw;" data="https://sameer.github.io/svg2gcode/#close"
+		style="top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+	</object>
 	</div>
-	<h1>Pen Plotter</h1>
-	{% block content %}
-	{% endblock %}
+	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
