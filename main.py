@@ -1,34 +1,36 @@
-from flask import Flask, redirect, url_for, render_template, request, Response, flash
-import requests
-import os
-import asyncio
+from flask import Flask, redirect, url_for, render_template, request
+from werkzeug.utils import secure_filename
+from flask_wtf import FlaskForm
+from wtforms import FileField, SubmitField
 import subprocess
-import sys
+import os
+from wtforms.validators import InputRequired
+from PIL import Image
+
 
 app = Flask(__name__)
-
-# async def run_cli():
-# subprocess.run(["/home/pi/UniversalGcodeSender/start-cli.sh","--port /dev/ttyUSB0 --baud 115200 -daemon --controller GRBL"])
-# if request.method == 'POST':
-#  if request.form.get['submit_button'] == 'Connect':
-#
-#  elif request.form.get['submit_button'] == 'Home':
-#     subprocess.call(["/home/pi/my_flask/UI_Buttons_Bash/Homing.sh"], shell=True)
-#  else:
-#        pass # unknown
-#  elif request.method == 'GET':
+app.config['SECRET_KEY'] = 'Gooseberry'
+app.config['UPLOAD_FOLDER'] = 'static/files'
 
 
-@app.route('/')
+class UploadFileForm(FlaskForm):
+    file = FileField("File", validators=[InputRequired()])
+    submit = SubmitField("Upload File")
+
+
+@app.route('/', methods=['GET', "POST"])
 def home():
-    return render_template('base.html')
-
-
-@app.route("/connect/")
-def connnect():
-    subprocess.run(
-        ["/home/pi/my_flask/UI_Buttons_Bash/Connect.sh"], shell=True)
-    return render_template('Control.html')
+    form = UploadFileForm()
+    if form.validate_on_submit():
+        # Get and store file and rename file to Print.jpg
+        file = form.file.data
+        file.filename = "Print.jpg"
+        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
+        # resize image using 
+        img = Image.open('./static/files/Print.jpg') # Open image
+        img = img.resize((150, 100)) # Resize image
+        img.save('./static/files/foo.jpg') # Save resized image
+    return render_template('base.html', form=form)
 
 @app.route("/homing/")
 def homing():
