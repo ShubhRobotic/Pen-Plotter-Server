@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="uft-8" />
+</head>
+<body>
+	<form method='POST' enctype='multipart/form-data'>
+		{{form.hidden_tag()}}
+		{{form.file()}} <div id="form">{{form.submit()}}</div>
+	</form>
+	<form action="http://localhost:5000/">
+		<button type="submit">Home</button>
+	</form>
+</body>
+</html>

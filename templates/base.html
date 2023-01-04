@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<title>{% block title %}Control{% endblock %}</title>
+	<meta charset=utf-8>
+	<style>
+		
+			
+			
+		
+	</style>
+</head>
+	<h1>Pen Plotter</h1>
+<body>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="myTabContent" data-bs-toggle="tab" data-bs-target="#Control-tab-pane"
+				type="button" role="tab" aria-Resizes="Control-tab-pane" aria-selected="true">Control</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="myTabContent" data-bs-toggle="tab" data-bs-target="#Resize-tab-pane"
+				type="button" role="tab" aria-Resizes="Resize-tab-pane" aria-selected="false">Resize</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="myTabContent" data-bs-toggle="tab" data-bs-target="#Gcode-Converter-tab-pane"
+				type="button" role="tab" aria-Resizes="Gcode-Converter-tab-pane" aria-selected="false">Gcode-Converter</button>
+		</li>
+		<li class="nav-item" role="presentation">
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="Control-tab-pane" role="tabpanel" aria-labelledby="Control-tab"
+			tabindex="0">
+			<!--		Control-Starts		-->
+			<div id="output_div" style="margin-top: 10px;margin-bottom: 10px;">
+			<form action="/connect/">
+				<button name="ResizeBtn" type="submit">Connect</button>
+			</form>
+			<form action="/homing/">
+				<button name="ResizeBtn" type="submit">Homing</button>
+			</form>
+			<form action="/reset_alarm/">
+				<button name="ResizeBtn" type="submit">Reset_Alarm</button>
+			</form>
+			<form action="/Print/">
+				<button name="ResizeBtn" type="submit">Execute</button>
+			</form>
+			</div>
+			<!--		Control-Ends		-->
+		</div>
+	</div>
+	<div class="tab-pane fade" id="Resize-tab-pane" role="tabpanel" aria-labelledby="Resize-tab" tabindex="0">
+		<!--			RESiZE-STARTS 			-->
+		<form method='POST' enctype='multipart/form-data'>
+			{{form.hidden_tag()}}
+			{{form.file()}} <div id="form">{{form.submit()}}</div>
+		</form>
+		
+		<script>
+			function alertFunction() {
+				alert("File has been Uploaded");
+			}
+			document.querySelector("#form").addEventListener("click", alertFunction);
+
+		</script>
+
+		<a href="./static/files/Run.svg" download="" class="download-btn">Download</a>
+	<a href="/upload">Draw Gcode File</a>
+<!--				<object style="height: 75vh; width: 100vw;" data="https://autosvg.vercel.app/"
+style="top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+	</object> -->
+	
+		<!--			RESIZE-ENDS		-->
+	</div>
+	<div class="tab-pane fade" id="Gcode-Converter-tab-pane" role="tabpanel" aria-labelledby="Gcode-Converter-tab" tabindex="0">
+	
+		<h1></h1>
+
+	<object style="height: 75vh; width: 100vw; position: absolute; top: 25vh;" data="https://sameer.github.io/svg2gcode/#close">
+	</object>
+	</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+		integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
